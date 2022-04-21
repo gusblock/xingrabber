@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+  <head><title>My Test Extension Options</title></head>
   <body>
     <form action="options.js" method="post" id="form"> 
       <label for="fname">Vorname:</label>
@@ -12,11 +13,13 @@
       <input type="text" id="jobtitle" name="jobtitel" value="[Jobtitel]"><br><br>  
       <label><input type="submit" value="submit" /><label>
     </form>
-
-
-    <div id="status"></div>
-<button id="save">Save</button>
-
+    <table border="1" cellpadding="1" style="border-collapse:collapse;">
+      <tr>
+        <th></th>
+      </tr>
+      <tr>
+        <td align="right"><span id="optionsave">not saved</span></td>
+      </tr>
   </body>
-  <script src="options.js"></script>
+  <script type="text/javascript" src="options.js"></script>
 </html>

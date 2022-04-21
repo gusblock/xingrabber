@@ -1,23 +1,42 @@
 
-const form  = document.getElementById('form');
 
-/* chrome.tabs.sendMessage(
-  content.js,
-  {from: 'options', subject: 'form'},
-  // ...also specifying a callback to be called 
-  //    from the receiving end (content script).
-  setcontactform); */
-/*
-
-  document.getElementById('form').onsubmit = function () {
-    let muser = document.getElementById('form');
-    console.log('Formular wird ausgefüllt');
-    if ( muser.value == '') {
-        muser.focus();
-        return false;
-    }
+function logSubmit(event) {
+  event.preventDefault();
 }
 
+function savevariables(){
+  var contactform = {
+    fname: document.getElementById('fname').value,
+    lname: document.getElementById('lname').value,
+    jtitle: document.getElementById('jobtitle').value,
+    dort: document.getElementById('place').value
+  }
+  document.getElementById('optionsave').textContent = contactform.fname;
+  console.log(contactform);
+  return contactform;
+} 
+
+
+
+form.addEventListener('submit', logSubmit);
+form.addEventListener('submit', savevariables);
+form.addEventListener('submit', sendmsg);
+
+function sendmsg(){
+chrome.runtime.sendMessage(
+  {from: 'options', subject: 'optionsset', msg: savevariables},
+  // ...also specifying a callback to be called 
+  //    from the receiving end (content script).
+  );
+}
+
+
+
+
+
+
+
+/*
 form.addEventListener('submit', (event) => {
     // handle the form data
     var contactform = {
@@ -31,15 +50,13 @@ form.addEventListener('submit', (event) => {
     console.log(contactform)
     save_options(contactform)
 });
-
-
-
-function save_options(contactform) {
-  var former = document.getElementById('signup').value;
+*/
+/*
+function save_options(muser) {
   chrome.storage.sync.set({
-    forms: former
+    forms: muser
   }, function() {
-    console.log('Value is set to ' + former);
+    console.log('Value is set to ' + muser);
     var status = document.getElementById('status');
     status.textContent = 'Options saved.';
     // Update status to let user know options were saved.
@@ -57,10 +74,10 @@ function restore_options() {
     forms: 'red',
   }, function(items) {
     console.log('Value currently is ' + items.key);
-    document.getElementById('forms').textContent = items.forms;
+    document.getElementById('optionsave').textContent = items.forms;
   });
 }
-document.addEventListener('DOMContentLoaded', restore_options);
-document.getElementById('save').addEventListener('click',save_options); 
 
-*/
+
+document.addEventListener('DOMContentLoaded', restore_options);
+document.querySelector('form').addEventListener('post',save_options); */

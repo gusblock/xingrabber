@@ -10,7 +10,13 @@ const setContact = info => {
   document.getElementById('placeholder3').textContent = info.liste[2];
   document.getElementById('placeholder4').textContent = info.liste[3];
   document.getElementById('placeholder5').textContent = info.liste[4];
+  document.getElementById('titlename').textContent = info.titlename;
+  document.getElementById('placeholder6').textContent = "Gibts nich";
 };
+
+chrome.storage.sync.get(['key'], function (result) {
+  console.log('Value currently is ' + result.key);
+});
 
 // Once the DOM is ready...
 window.addEventListener('DOMContentLoaded', () => {
